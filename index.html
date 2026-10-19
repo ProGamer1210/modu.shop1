@@ -1,0 +1,883 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b0a">
+  <meta name="description" content="MODU entwickelt praktische 3D-Druck-Ideen für Gaming und Alltag. Entdecke den MODU Headset Holder – unser Gaming-Konzept.">
+  <title>MODU — Built for Your Setup</title>
+
+  <style>
+    :root {
+      --bg: #080b0a;
+      --panel: #101512;
+      --panel-light: #151d18;
+      --green: #b7ff4a;
+      --green-dark: #8dcc32;
+      --text: #f3f6f1;
+      --muted: #a0aaa1;
+      --border: rgba(183, 255, 74, 0.18);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(ellipse at 75% 0%, rgba(101, 151, 45, 0.12), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8, 11, 10, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.55rem;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: inline-grid;
+      place-items: center;
+      border: 2px solid var(--green);
+      color: var(--green);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      letter-spacing: 0;
+      transform: skew(-7deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .nav-links a:hover,
+    .footer-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-cta {
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 9px 15px;
+      border-radius: 9px;
+      font-weight: 700;
+    }
+
+    .nav-cta:hover {
+      background: var(--green);
+      color: #10150b;
+    }
+
+    .hero {
+      padding: 92px 0 82px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      font-weight: 800;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(3.1rem, 7vw, 5.9rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      margin: 22px 0;
+      max-width: 720px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero-copy {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 30px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 19px;
+      border-radius: 10px;
+      font-weight: 800;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #10150b;
+    }
+
+    .btn-primary:hover {
+      background: #cbff7d;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--green);
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background:
+        linear-gradient(145deg, rgba(183, 255, 74, 0.08), transparent 45%),
+        repeating-linear-gradient(
+          135deg,
+          transparent,
+          transparent 24px,
+          rgba(255, 255, 255, 0.018) 25px,
+          rgba(255, 255, 255, 0.018) 26px
+        ),
+        #0e130f;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border: 1px solid rgba(183, 255, 74, 0.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 30px rgba(183, 255, 74, 0.025),
+                  0 0 0 60px rgba(183, 255, 74, 0.02);
+    }
+
+    .hero-wordmark {
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-wordmark strong {
+      display: block;
+      font-size: clamp(3.6rem, 8vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--green);
+      line-height: 1;
+      text-shadow: 0 0 35px rgba(183, 255, 74, 0.16);
+    }
+
+    .hero-wordmark small {
+      display: block;
+      margin-top: 14px;
+      color: #d6ded4;
+      font-size: 0.77rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .concept-stamp {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 76px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      margin-top: 10px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+    }
+
+    .section-heading p {
+      max-width: 420px;
+      color: var(--muted);
+    }
+
+    .product-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(125deg, #121913, #0d110e);
+    }
+
+    .product-visual {
+      min-height: 390px;
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse at center, rgba(183, 255, 74, 0.1), transparent 65%),
+        #0d120e;
+    }
+
+    .visual-label {
+      color: var(--green);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .stand-placeholder {
+      min-height: 190px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 1px dashed rgba(183, 255, 74, 0.28);
+      border-radius: 16px;
+      color: #b8c4b6;
+      padding: 20px;
+    }
+
+    .stand-placeholder strong {
+      display: block;
+      color: var(--green);
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 7px;
+    }
+
+    .stand-placeholder span {
+      font-size: 0.86rem;
+    }
+
+    .product-info {
+      padding: clamp(28px, 5vw, 52px);
+    }
+
+    .status {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: rgba(183, 255, 74, 0.09);
+      border: 1px solid rgba(183, 255, 74, 0.22);
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .product-info h3 {
+      margin: 17px 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .product-info > p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 25px 0 28px;
+    }
+
+    .feature {
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 3px;
+    }
+
+    .feature span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--green);
+      background: rgba(183, 255, 74, 0.055);
+      color: #c1cbc0;
+      font-size: 0.88rem;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .value-card {
+      padding: 25px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      border-radius: var(--radius);
+    }
+
+    .value-number {
+      color: var(--green);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+    }
+
+    .value-card h3 {
+      margin: 14px 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .value-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .roadmap {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: clamp(24px, 5vw, 42px);
+      background: linear-gradient(135deg, #111711, #0b0e0c);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 26px;
+    }
+
+    .step {
+      border-top: 1px solid var(--border);
+      padding-top: 17px;
+    }
+
+    .step span {
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .step h3 {
+      margin: 8px 0;
+      font-size: 1.05rem;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 28px;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background:
+        radial-gradient(ellipse at right, rgba(183, 255, 74, 0.09), transparent 50%),
+        var(--panel);
+    }
+
+    .contact-panel h2 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin: 10px 0;
+    }
+
+    .contact-panel p {
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin-top: 13px;
+      color: #768176;
+      font-size: 0.78rem;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 64px;
+      }
+
+      .hero-panel {
+        min-height: 290px;
+      }
+
+      .product-card {
+        grid-template-columns: 1fr;
+      }
+
+      .product-visual {
+        min-height: 270px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .contact-panel {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand {
+        font-size: 1.25rem;
+      }
+
+      .nav-links {
+        gap: 13px;
+        font-size: 0.82rem;
+      }
+
+      .nav-links a:nth-child(2) {
+        display: none;
+      }
+
+      .nav-cta {
+        padding: 7px 10px;
+      }
+
+      .hero {
+        padding: 52px 0;
+        gap: 34px;
+      }
+
+      .hero-copy {
+        font-size: 1rem;
+      }
+
+      .section {
+        padding: 54px 0;
+      }
+
+      .values,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .product-info {
+        padding: 25px 20px;
+      }
+
+      .product-visual {
+        padding: 22px;
+      }
+
+      .footer-inner {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#start" aria-label="MODU Startseite">
+        <span class="brand-mark">M</span>
+        MODU
+      </a>
+
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="#produkt">Produkt</a>
+        <a href="#philosophie">Philosophie</a>
+        <a class="nav-cta" href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero" id="start">
+      <div>
+        <div class="eyebrow">3D-Design für dein Setup</div>
+        <h1>Built for<br>your <span>setup.</span></h1>
+        <p class="hero-copy">
+          MODU entwickelt clevere Ideen für Gaming und Alltag.
+          Schlichtes Design, praktische Funktionen und Produkte,
+          die wir Schritt für Schritt weiterentwickeln.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#produkt">Gaming-Konzept entdecken ↗</a>
+          <a class="btn btn-secondary" href="#philosophie">Was ist MODU?</a>
+        </div>
+      </div>
+
+      <div class="hero-panel" aria-label="MODU Markenbereich">
+        <div class="hero-wordmark">
+          <strong>MODU</strong>
+          <small>Make Space. Play Better.</small>
+        </div>
+        <div class="concept-stamp">Independent product concepts</div>
+      </div>
+    </section>
+
+    <section class="section" id="produkt">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Im Fokus</div>
+            <h2>Das nächste Level<br>für deinen Schreibtisch.</h2>
+          </div>
+          <p>
+            Weniger Unordnung. Mehr Platz für das, worauf es beim Gaming ankommt.
+            Unser erstes Gaming-Konzept ist bewusst schlicht gehalten.
+          </p>
+        </div>
+
+        <article class="product-card">
+          <div class="product-visual">
+            <span class="visual-label">MODU / Konzept 001</span>
+            <div class="stand-placeholder">
+              <div>
+                <strong>MODU HEADSET HOLDER</strong>
+                <span>Produktkonzept – keine Produktabbildung</span>
+              </div>
+            </div>
+            <span class="visual-label">Designed for your setup</span>
+          </div>
+
+          <div class="product-info">
+            <span class="status">Konzeptphase · Noch nicht erhältlich</span>
+            <h3>MODU<br>Headset Holder</h3>
+            <p>
+              Ein geplanter Headset-Ständer für den Gaming-Schreibtisch.
+              Der Standfuß soll stabil sein, die Form soll modern wirken
+              und das MODU-Logo soll vorne gut sichtbar sitzen.
+            </p>
+
+            <div class="features">
+              <div class="feature">
+                <strong>Stabiler Stand</strong>
+                <span>Breite Basis als Designziel</span>
+              </div>
+              <div class="feature">
+                <strong>MODU-Logo</strong>
+                <span>Vorne im Design vorgesehen</span>
+              </div>
+              <div class="feature">
+                <strong>Schlichtes Design</strong>
+                <span>Passend zu Gaming-Setups</span>
+              </div>
+              <div class="feature">
+                <strong>3D-Druck-Idee</strong>
+                <span>Für eine spätere Fertigung geplant</span>
+              </div>
+            </div>
+
+            <a class="btn btn-primary" href="#kontakt">Interesse mitteilen ↗</a>
+
+            <div class="notice">
+              Transparenz: Dieses Produkt ist derzeit ein Entwurf. Es wurde noch
+              nicht gedruckt, getestet oder zum Verkauf angeboten. Maße,
+              Material und endgültiges Design können sich noch ändern.
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="philosophie">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Die MODU-Idee</div>
+            <h2>Einfach. Praktisch. Durchdacht.</h2>
+          </div>
+          <p>
+            Wir starten klein, testen unsere Ideen und verbessern sie,
+            bevor daraus fertige Produkte werden.
+          </p>
+        </div>
+
+        <div class="values">
+          <article class="value-card">
+            <div class="value-number">01 / DESIGN</div>
+            <h3>Weniger ist mehr</h3>
+            <p>Klare Formen und ein aufgeräumtes Erscheinungsbild statt unnötiger Details.</p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-number">02 / FUNKTION</div>
+            <h3>Für den Alltag</h3>
+            <p>Jede Idee soll einen konkreten Zweck erfüllen und im täglichen Gebrauch helfen.</p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-number">03 / ENTWICKLUNG</div>
+            <h3>Schritt für Schritt</h3>
+            <p>Vom ersten Entwurf über den Prototyp bis zu Verbesserungen – ohne voreilige Versprechen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="roadmap">
+          <div class="eyebrow">Unser Entwicklungsplan</div>
+          <h2 style="font-size:clamp(2rem, 4vw, 3rem); margin-top:12px; letter-spacing:-0.04em;">
+            Von der Idee zum Produkt.
+          </h2>
+          <p style="color:var(--muted); margin-top:10px; max-width:650px;">
+            Wir zeigen den Entwicklungsstand offen. Erst wenn ein Schritt wirklich
+            erledigt ist, geht es zum nächsten.
+          </p>
+
+          <div class="steps">
+            <div class="step">
+              <span>PHASE 01</span>
+              <h3>Konzept entwickeln</h3>
+              <p>Form, Logo und grundlegende Maße in einem CAD-Programm festlegen.</p>
+            </div>
+
+            <div class="step">
+              <span>PHASE 02</span>
+              <h3>Prototyp erstellen</h3>
+              <p>Das Modell später drucken und prüfen, ob es stabil und praktisch ist.</p>
+            </div>
+
+            <div class="step">
+              <span>PHASE 03</span>
+              <h3>Verbessern</h3>
+              <p>Erst nach Tests über Material, endgültige Ausführung und mögliche Verfügbarkeit entscheiden.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <div class="eyebrow">Bleib in Kontakt</div>
+            <h2>Eine Idee für MODU?</h2>
+            <p>
+              Du hast Feedback zum Headset Holder oder eine Idee für ein zukünftiges
+              Produkt? Schreib uns. Der Kontakt dient aktuell nur dem Austausch,
+              nicht der Bestellung.
+            </p>
+          </div>
+
+          <a class="btn btn-primary" id="contactButton" href="mailto:">
+            Kontakt aufnehmen ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a class="brand" href="#start" aria-label="MODU nach oben">
+          <span class="brand-mark">M</span>
+          MODU
+        </a>
+
+        <div class="footer-links">
+          <a href="#produkt">Produkt</a>
+          <a href="#philosophie">Über MODU</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+
+        <span>© <span id="year"></span> MODU</span>
+      </div>
+
+      <p class="footer-note">
+        Konzeptseite – derzeit keine Bestellungen, kein Verkauf und keine bestätigte Produktverfügbarkeit.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Trage hier deine Kontakt-E-Mail ein, zwischen den Anführungszeichen.
+    // Beispiel: const CONTACT_EMAIL = "kontakt@example.com";
+    const CONTACT_EMAIL = "modu.druck@gmail.com";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const contactButton = document.getElementById("contactButton");
+
+    if (CONTACT_EMAIL.trim() !== "") {
+      contactButton.href =
+        "mailto:" + encodeURIComponent(CONTACT_EMAIL.trim()) +
+        "?subject=" + encodeURIComponent("Nachricht an MODU");
+    } else {
+      contactButton.href = "#kontakt";
+      contactButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        alert("Bitte trage zuerst deine Kontakt-E-Mail unten im JavaScript-Code ein.");
+      });
+    }
+  </script>
+</body>
+</html>
